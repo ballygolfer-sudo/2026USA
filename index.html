@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 美西 20 週年豪華自駕之旅</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --card-bg: rgba(255, 255, 255, 0.92); /* 卡片半透明 */
+            --text-color: #333;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            /* --- 背景設定 --- */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(30, 60, 114, 0.85);
+            backdrop-filter: blur(5px);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            margin: 10px 0 0;
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-around;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .info-item {
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .info-item i {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+        }
+
+        .info-item div {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+        }
+        
+        .info-item span {
+            font-size: 0.85rem;
+            color: #666;
+            display: block;
+            margin-top: 3px;
+        }
+
+        .timeline {
+            position: relative;
+        }
+
+        .day-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            border-left: 6px solid var(--primary-color);
+        }
+
+        .day-header {
+            padding: 15px 20px;
+            background: rgba(248, 249, 250, 0.9);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .day-date {
+            font-weight: 800;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .day-location {
+            font-size: 0.9rem;
+            color: #555;
+            background: #e9ecef;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .day-content {
+            padding: 20px;
+        }
+
+        .event {
+            margin-bottom: 20px;
+            padding-left: 18px;
+            border-left: 2px solid #ddd;
+            position: relative;
+        }
+
+        .event:last-child {
+            margin-bottom: 0;
+        }
+
+        .event::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--accent-color);
+        }
+
+        .event-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2c3e50;
+        }
+
+        .event-desc {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .conf-number {
+            display: inline-block;
+            background: #fff;
+            color: #2980b9;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-family: 'Monaco', 'Consolas', monospace;
+            margin-top: 5px;
+            border: 1px solid #bce0fd;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .tag.hotel { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+        .tag.flight { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .tag.car { background: linear-gradient(135deg, #f39c12, #d35400); }
+        .tag.food { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .tag.activity { background: linear-gradient(135deg, #e67e22, #d35400); }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: #fff;
+            color: #4285F4;
+            border: 1px solid #4285F4;
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .nav-btn:hover {
+            background-color: #4285F4;
+            color: white;
+            box-shadow: 0 3px 8px rgba(66, 133, 244, 0.3);
+        }
+
+        .alert-box {
+            background: linear-gradient(to right, #fff3cd, #fff8e1);
+            color: #856404;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            border: 1px solid #ffeeba;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .footer {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.8rem;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.8rem; }
+            .info-item { min-width: 45%; }
+            .day-header { flex-direction: column; align-items: flex-start; gap: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>2026 美西豪華自駕</h1>
+        <p>20th Anniversary Trip | Feb 23 - Mar 14</p>
+    </div>
+
+    <div class="container">
+        
+        <div class="alert-box">
+            <i class="fas fa-exclamation-triangle"></i> <strong>行前重要提醒：</strong>
+            <ul style="margin: 8px 0 0 20px; padding: 0;">
+                <li><strong>2026/1/26 (一)</strong> 記得搶台灣高鐵 (左營->桃園) 早鳥票</li>
+                <li><strong>Sedona 住宿</strong>：櫃台只到 19:00，若晚到請務必提前聯繫</li>
+                <li><strong>必備文件</strong>：護照、台灣駕照、國際駕照、ESTA</li>
+                <li><strong>衣物</strong>：大峽谷/佩吉早晚溫差大，請帶羽絨外套</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <div class="info-item">
+                <i class="fas fa-plane"></i>
+                <div>JX2 / JX25</div>
+                <span>星宇航空</span>
+                <div class="conf-number">D9N5NG</div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-car"></i>
+                <div>Full Size SUV</div>
+                <span>Alamo (LAX-PHX)</span>
+                <div class="conf-number">1392466896</div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-users"></i>
+                <div>3 Adults</div>
+                <span>Tseng Family Trip</span>
+            </div>
+        </div>
+
+        <div class="timeline" id="timeline-container"></div>
+
+        <div class="footer">Designed for the 20th Anniversary Trip ❤️</div>
+    </div>
+
+    <script>
+        const itinerary = [
+            { day: 1, date: "2/23 (一)", location: "Taipei ➔ LA", events: [ { type: "flight", title: "星宇航空 JX2", desc: "TPE (23:40) ➔ LAX (19:00)", conf: "D9N5NG" }, { type: "car", title: "Alamo 取車", desc: "20:30 @ LAX 機場 (Full Size SUV)", conf: "1392466896", nav: "Alamo Rent A Car - Los Angeles International Airport" }, { type: "hotel", title: "Sheraton San Gabriel", desc: "Check-in (5 Nights) *Junior Suite*", conf: "73352691268059", nav: "Sheraton Los Angeles San Gabriel" }, { type: "food", title: "宵夜: The Congee", desc: "道地港式粥品 (營業至深夜)", nav: "The Congee Alhambra" } ] },
+            { day: 2, date: "2/24 (二)", location: "Los Angeles", events: [ { type: "activity", title: "聖蓋博生活", desc: "訪友、調時差、全統廣場採買", nav: "San Gabriel Square" }, { type: "food", title: "早午餐: Lunasia", desc: "人氣港式飲茶 (建議早去)", nav: "Lunasia Dim Sum House" }, { type: "food", title: "晚餐: 海底撈", desc: "Haidilao Hot Pot (氣氛佳)", nav: "Haidilao Hot Pot Los Angeles" } ] },
+            { day: 3, date: "2/25 (三)", location: "Los Angeles", events: [ { type: "activity", title: "LA 城市探索", desc: "Urban Light 燈柱、The Grove 購物", nav: "Urban Light" }, { type: "food", title: "早午餐: 義美豆漿", desc: "台式傳統早餐 (飯糰/燒餅)", nav: "Yi Mei Deli" }, { type: "food", title: "晚餐: 新港海鮮", desc: "Newport Seafood (必點龍蝦伊麵)", nav: "Newport Seafood Restaurant" } ] },
+            { day: 4, date: "2/26 (四)", location: "Los Angeles", events: [ { type: "activity", title: "海灘與天文台", desc: "Santa Monica Pier 散步 / Griffith 天文台看夜景", nav: "Griffith Observatory" }, { type: "food", title: "早午餐: Bluhouse", desc: "美式健康早午餐", nav: "Bluhouse Cafe" }, { type: "food", title: "晚餐: 海港大酒樓", desc: "精緻粵菜 (Sea Harbour)", nav: "Sea Harbour Seafood Restaurant" } ] },
+            { day: 5, date: "2/27 (五)", location: "Los Angeles", events: [ { type: "activity", title: "Outlet 購物", desc: "Citadel Outlets (離飯店近)", nav: "Citadel Outlets" }, { type: "activity", title: "整理行李", desc: "準備明天長途移動" }, { type: "food", title: "晚餐: 牛角燒肉", desc: "日式燒肉慶祝", nav: "Gyu-Kaku Japanese BBQ" } ] },
+            { day: 6, date: "2/28 (六)", location: "LA ➔ Vegas", events: [ { type: "car", title: "移動日 (週六車多)", desc: "11:00 退房前往拉斯維加斯 (約 4-5 小時)" }, { type: "activity", title: "中途點: 七彩巨石", desc: "Seven Magic Mountains (拍照點)", nav: "Seven Magic Mountains" }, { type: "hotel", title: "Jockey Club", desc: "Check-in (3 Nights) *2 Bedroom Suite*", conf: "73352705820872", nav: "Jockey Club Las Vegas" }, { type: "food", title: "晚餐: Mon Ami Gabi", desc: "法式餐酒館 (戶外座可看水舞)", nav: "Mon Ami Gabi" } ] },
+            { day: 7, date: "3/01 (日)", location: "Las Vegas", events: [ { type: "activity", title: "賭城自由活動", desc: "享受飯店設施、逛街" }, { type: "activity", title: "O Show", desc: "21:00 @ Bellagio (⚠️ 請於 20:30 前入場)", conf: "VCWS-004FGXWD", nav: "Bellagio Hotel & Casino" }, { type: "food", title: "早午餐: Bacchanal", desc: "凱薩皇宮 Buffet (賭城第一名)", nav: "Bacchanal Buffet" }, { type: "food", title: "晚餐: Bavette's", desc: "頂級牛排 (氣氛極佳)", nav: "Bavette's Steakhouse & Bar" } ] },
+            { day: 8, date: "3/02 (一)", location: "Las Vegas", events: [ { type: "activity", title: "Sphere & Strip", desc: "球體劇場外觀拍照、凱薩宮商店街", nav: "Sphere" }, { type: "food", title: "晚餐: Best Friend", desc: "Roy Choi 韓式創意料理 (Park MGM)", nav: "Best Friend Las Vegas" } ] },
+            { day: 9, date: "3/03 (二)", location: "Vegas ➔ Page", events: [ { type: "car", title: "前往 Page", desc: "行車約 4.5 小時 (經 Kanab)" }, { type: "activity", title: "馬蹄灣夕陽", desc: "Horseshoe Bend (需付停車費)", nav: "Horseshoe Bend Parking" }, { type: "hotel", title: "Roam America", desc: "豪華露營小木屋 Check-in", conf: "73350791333455", nav: "Roam America Horseshoe Bend" }, { type: "food", title: "晚餐: Big John's BBQ", desc: "德州煙燻烤肉 (有現場音樂)", nav: "Big John's Texas BBQ" } ] },
+            { day: 10, date: "3/04 (三)", location: "Page / Bryce", events: [ { type: "car", title: "布萊斯峽谷一日遊", desc: "Bryce Canyon NP (看石林)", nav: "Bryce Canyon Visitor Center" }, { type: "food", title: "晚餐: BirdHouse", desc: "美味炸雞 (Page 當地名店)", nav: "BirdHouse Page AZ" } ] },
+            { day: 11, date: "3/05 (四)", location: "Page", events: [ { type: "activity", title: "下羚羊峽谷", desc: "12:30 導覽 (Ken's Tours) *提前30分報到*", conf: "#KEN-308018", nav: "Ken's Tours Lower Antelope Canyon" }, { type: "food", title: "早午餐: Ranch House", desc: "美式鄉村早餐", nav: "Ranch House Grille" }, { type: "food", title: "晚餐: El Tapatio", desc: "墨西哥料理", nav: "El Tapatio Page" } ] },
+            { day: 12, date: "3/06 (五)", location: "Page ➔ MV", events: [ { type: "car", title: "前往紀念碑谷", desc: "途經阿甘正傳點 (Forrest Gump Point)", nav: "Forrest Gump Point" }, { type: "hotel", title: "The View Hotel", desc: "Check-in (陽台看夕陽/日出)", conf: "TVHUT05100970", nav: "The View Hotel Monument Valley" }, { type: "food", title: "晚餐: The View", desc: "飯店內景觀餐廳 (唯一選擇)", nav: "The View Restaurant Monument Valley" } ] },
+            { day: 13, date: "3/07 (六)", location: "MV ➔ Grand Canyon", events: [ { type: "car", title: "前往大峽谷", desc: "東口進 (Desert View) -> 南緣", nav: "Desert View Watchtower" }, { type: "hotel", title: "El Tovar Hotel", desc: "國家公園內古蹟飯店", conf: "20287918", nav: "El Tovar Hotel" }, { type: "food", title: "晚餐: El Tovar Dining", desc: "總統級牛排館 (需預約)", nav: "El Tovar Dining Room" } ] },
+            { day: 14, date: "3/08 (日)", location: "GCN ➔ Sedona", events: [ { type: "car", title: "前往 Sedona", desc: "經 89A 公路 (Oak Creek Canyon 絕美公路)" }, { type: "hotel", title: "The Views Inn", desc: "Check-in (⚠️ 櫃台只到 19:00)", conf: "73352574124832", nav: "The Views Inn Sedona" }, { type: "activity", title: "機場高台夕陽", desc: "Airport Mesa (能量漩渦)", nav: "Airport Mesa" }, { type: "food", title: "晚餐: Hideaway House", desc: "義式景觀餐廳", nav: "Hideaway House" } ] },
+            { day: 15, date: "3/09 (一)", location: "Sedona", events: [ { type: "activity", title: "紅岩探險", desc: "惡魔橋 (Devil's Bridge) 健行", nav: "Dry Creek Vista Trailhead" }, { type: "food", title: "早午餐: Coffee Pot", desc: "101 種蛋捲名店", nav: "Coffee Pot Restaurant" }, { type: "food", title: "晚餐: Elote Cafe", desc: "著名墨西哥菜 (需排隊)", nav: "Elote Cafe" } ] },
+            { day: 16, date: "3/10 (二)", location: "Sedona", events: [ { type: "activity", title: "人文之旅", desc: "傑羅姆鬼鎮 (Jerome)、聖十字教堂", nav: "Jerome, Arizona" }, { type: "food", title: "晚餐: Mariposa", desc: "拉丁風情景觀餐廳 (需預約)", nav: "Mariposa Latin Inspired Grill" } ] },
+            { day: 17, date: "3/11 (三)", location: "Sedona", events: [ { type: "activity", title: "觀光火車", desc: "Verde Canyon Railroad", nav: "Verde Canyon Railroad" }, { type: "food", title: "晚餐: Dahl & Di Luca", desc: "義式燭光晚餐 (氣氛佳)", nav: "Dahl & Di Luca Ristorante" } ] },
+            { day: 18, date: "3/12 (四)", location: "Sedona ➔ Phoenix", events: [ { type: "car", title: "前往鳳凰城", desc: "途經 Montezuma Castle 古蹟", nav: "Montezuma Castle National Monument" }, { type: "hotel", title: "WaterWalk Phoenix", desc: "Check-in (兩房公寓) *可洗衣服*", conf: "73352608112867", nav: "WaterWalk Phoenix North Happy Valley" }, { type: "activity", title: "採買", desc: "Desert Ridge / Albertsons 超市", nav: "Desert Ridge Marketplace" }, { type: "food", title: "晚餐: Humble Pie", desc: "手工 Pizza", nav: "Humble Pie" } ] },
+            { day: 19, date: "3/13 (五)", location: "Phoenix", events: [ { type: "activity", title: "純度假模式", desc: "整理行李、洗衣、最後採買" }, { type: "food", title: "晚餐: Steak 44", desc: "頂級牛排惜別宴 (需預約)", nav: "Steak 44" } ] },
+            { day: 20, date: "3/14 (六)", location: "PHX ➔ Taipei", events: [ { type: "food", title: "午餐: Culinary Dropout", desc: "機場前最後一餐", nav: "Culinary Dropout" }, { type: "car", title: "Alamo 還車", desc: "20:30 前還車 @ PHX 機場", conf: "1392466896", nav: "PHX Rental Car Center" }, { type: "flight", title: "星宇航空 JX25", desc: "PHX (22:45) ➔ TPE (直飛)", conf: "D9N5NG" } ] }
+        ];
+
+        function renderTimeline() {
+            const container = document.getElementById('timeline-container');
+            itinerary.forEach(day => {
+                const dayCard = document.createElement('div');
+                dayCard.className = 'day-card';
+                let eventsHtml = '';
+                day.events.forEach(event => {
+                    let icon = 'circle';
+                    let tagClass = 'activity';
+                    if(event.type === 'flight') { icon = 'plane'; tagClass = 'flight'; }
+                    if(event.type === 'hotel') { icon = 'bed'; tagClass = 'hotel'; }
+                    if(event.type === 'car') { icon = 'car'; tagClass = 'car'; }
+                    if(event.type === 'food') { icon = 'utensils'; tagClass = 'food'; }
+                    const navButton = event.nav ? `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.nav)}" target="_blank" class="nav-btn"><i class="fas fa-location-arrow"></i> 導航</a>` : '';
+                    const confHtml = event.conf ? `<div class="conf-number">Conf: ${event.conf}</div>` : '';
+                    eventsHtml += `<div class="event"><div class="event-title"><span class="tag ${tagClass}"><i class="fas fa-${icon}"></i></span> ${event.title}</div><div class="event-desc">${event.desc}</div>${confHtml}${navButton}</div>`;
+                });
+                dayCard.innerHTML = `<div class="day-header"><div class="day-date">Day ${day.day} - ${day.date}</div><div class="day-location">${day.location}</div></div><div class="day-content">${eventsHtml}</div>`;
+                container.appendChild(dayCard);
+            });
+        }
+        renderTimeline();
+    </script>
+</body>
+</html>
