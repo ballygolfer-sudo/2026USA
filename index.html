@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -15,7 +16,6 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            /* 背景圖：亞利桑那公路夕陽 */
             background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
@@ -296,7 +296,8 @@
         </div>
 
         <div class="timeline" id="timeline-container">
-            </div>
+            <!-- JavaScript will load content here -->
+        </div>
 
         <div class="footer">
             Designed for the 20th Anniversary Trip ❤️
@@ -434,4 +435,103 @@
                 location: "MV ➔ Grand Canyon",
                 events: [
                     { type: "car", title: "前往大峽谷", desc: "東口進 (Desert View) -> 南緣", nav: "Desert View Watchtower" },
-                    { type: "hotel", title: "El Tovar Hotel",
+                    { type: "hotel", title: "El Tovar Hotel", desc: "國家公園內古蹟飯店", conf: "20287918", nav: "El Tovar Hotel" },
+                    { type: "food", title: "晚餐: El Tovar Dining", desc: "總統級牛排館 (需預約)", nav: "El Tovar Dining Room" }
+                ]
+            },
+            {
+                day: 14,
+                date: "3/08 (日)",
+                location: "GCN ➔ Sedona",
+                events: [
+                    { type: "car", title: "前往 Sedona", desc: "經 89A 公路 (Oak Creek Canyon 絕美公路)" },
+                    { type: "hotel", title: "The Views Inn", desc: "Check-in (⚠️ 櫃台只到 19:00)", conf: "73352574124832", nav: "The Views Inn Sedona" },
+                    { type: "activity", title: "機場高台夕陽", desc: "Airport Mesa (能量漩渦)", nav: "Airport Mesa" },
+                    { type: "food", title: "晚餐: Hideaway House", desc: "義式景觀餐廳", nav: "Hideaway House" }
+                ]
+            },
+            {
+                day: 15,
+                date: "3/09 (一)",
+                location: "Sedona",
+                events: [
+                    { type: "activity", title: "紅岩探險", desc: "惡魔橋 (Devil's Bridge) 健行", nav: "Dry Creek Vista Trailhead" },
+                    { type: "food", title: "早午餐: Coffee Pot", desc: "101 種蛋捲名店", nav: "Coffee Pot Restaurant" },
+                    { type: "food", title: "晚餐: Elote Cafe", desc: "著名墨西哥菜 (需排隊)", nav: "Elote Cafe" }
+                ]
+            },
+            {
+                day: 16,
+                date: "3/10 (二)",
+                location: "Sedona",
+                events: [
+                    { type: "activity", title: "人文之旅", desc: "傑羅姆鬼鎮 (Jerome)、聖十字教堂", nav: "Jerome, Arizona" },
+                    { type: "food", title: "晚餐: Mariposa", desc: "拉丁風情景觀餐廳 (需預約)", nav: "Mariposa Latin Inspired Grill" }
+                ]
+            },
+            {
+                day: 17,
+                date: "3/11 (三)",
+                location: "Sedona",
+                events: [
+                    { type: "activity", title: "觀光火車", desc: "Classic Train Ride (13:00 出發) *含午餐券*", conf: "51328", nav: "Verde Canyon Railroad" },
+                    { type: "food", title: "晚餐: Dahl & Di Luca", desc: "義式燭光晚餐 (氣氛佳)", nav: "Dahl & Di Luca Ristorante" }
+                ]
+            },
+            {
+                day: 18,
+                date: "3/12 (四)",
+                location: "Sedona ➔ Phoenix",
+                events: [
+                    { type: "car", title: "前往鳳凰城", desc: "途經 Montezuma Castle 古蹟", nav: "Montezuma Castle National Monument" },
+                    { type: "hotel", title: "WaterWalk Phoenix", desc: "Check-in (兩房公寓) *可洗衣服*", conf: "73352608112867", nav: "WaterWalk Phoenix North Happy Valley" },
+                    { type: "activity", title: "採買", desc: "Desert Ridge / Albertsons 超市", nav: "Desert Ridge Marketplace" },
+                    { type: "food", title: "晚餐: Humble Pie", desc: "手工 Pizza", nav: "Humble Pie" }
+                ]
+            },
+            {
+                day: 19,
+                date: "3/13 (五)",
+                location: "Phoenix",
+                events: [
+                    { type: "activity", title: "純度假模式", desc: "整理行李、洗衣、最後採買" },
+                    { type: "food", title: "晚餐: Steak 44", desc: "頂級牛排惜別宴 (需預約)", nav: "Steak 44" }
+                ]
+            },
+            {
+                day: 20,
+                date: "3/14 (六)",
+                location: "PHX ➔ Taipei",
+                events: [
+                    { type: "food", title: "午餐: Culinary Dropout", desc: "機場前最後一餐", nav: "Culinary Dropout" },
+                    { type: "car", title: "Alamo 還車", desc: "20:30 前還車 @ PHX 機場", conf: "1392466896", nav: "PHX Rental Car Center" },
+                    { type: "flight", title: "星宇航空 JX25", desc: "PHX (22:45) ➔ TPE (直飛)", conf: "D9N5NG" }
+                ]
+            }
+        ];
+
+        function renderTimeline() {
+            const container = document.getElementById('timeline-container');
+            itinerary.forEach(day => {
+                const dayCard = document.createElement('div');
+                dayCard.className = 'day-card';
+                let eventsHtml = '';
+                day.events.forEach(event => {
+                    let icon = 'circle';
+                    let tagClass = 'activity';
+                    if(event.type === 'flight') { icon = 'plane'; tagClass = 'flight'; }
+                    if(event.type === 'hotel') { icon = 'bed'; tagClass = 'hotel'; }
+                    if(event.type === 'car') { icon = 'car'; tagClass = 'car'; }
+                    if(event.type === 'food') { icon = 'utensils'; tagClass = 'food'; }
+                    const navButton = event.nav ? `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.nav)}" target="_blank" class="nav-btn"><i class="fas fa-location-arrow"></i> 導航</a>` : '';
+                    const confHtml = event.conf ? `<div class="conf-number">Conf: ${event.conf}</div>` : '';
+                    eventsHtml += `<div class="event"><div class="event-title"><span class="tag ${tagClass}"><i class="fas fa-${icon}"></i></span> ${event.title}</div><div class="event-desc">${event.desc}</div>${confHtml}${navButton}</div>`;
+                });
+                dayCard.innerHTML = `<div class="day-header"><div class="day-date">Day ${day.day} - ${day.date}</div><div class="day-location">${day.location}</div></div><div class="day-content">${eventsHtml}</div>`;
+                container.appendChild(dayCard);
+            });
+        }
+        renderTimeline();
+    </script>
+</body>
+</html>
